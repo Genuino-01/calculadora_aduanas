@@ -1,0 +1,38 @@
+{
+  "name": "calculadora_aduanas",
+  "version": "1.0.0",
+  "description": "Proyecto de Calculadora de aduanas para determinar cual es el monto a pagar en impuestos. Estos valores son solo para dealers registrados en asociaciones de importadores.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Genuino-01/calculadora_aduanas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Genuino-01/calculadora_aduanas/issues"
+  },
+  "homepage": "https://github.com/Genuino-01/calculadora_aduanas#readme",
+  "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "@supabase/supabase-js": "^2.49.9",
+    "@tanstack/react-query": "^5.80.2",
+    "@types/node": "^22.15.29",
+    "autoprefixer": "^10.4.21",
+    "axios": "^1.9.0",
+    "next": "^15.3.3",
+    "postcss": "^8.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3"
+  }
+}

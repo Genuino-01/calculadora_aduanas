@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-dga-verde-suave text-dga-gris-oscuro font-sans;
+  /* Using colors and font defined in tailwind.config.js */
+}
+
+/* You can add more global styles or custom component classes here if needed */
