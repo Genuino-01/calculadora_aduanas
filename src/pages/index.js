@@ -43,10 +43,13 @@ export default function HomePage() {
             <span role="img" aria-label="calculator icon" className="text-2xl sm:text-3xl lg:text-4xl">🧮</span>
           </div>
           <p className="text-base sm:text-lg text-dga-verde-menta mb-4">República Dominicana - Cálculo de aranceles e impuestos</p>
+          {/* Exchange Rate Display - Modified for responsiveness */}
           {exchangeRate && (
-            <div className="absolute top-4 right-4 bg-dga-blanco text-dga-verde-profundo text-sm font-semibold px-3 py-1 rounded-full shadow-lg">
-              1 USD = {parseFloat(exchangeRate).toFixed(2)} DOP
-              {lastRateUpdate && <span className="text-xs block text-dga-gris-neutro">Actualizado: {lastRateUpdate}</span>}
+            <div className="mt-2 text-center sm:absolute sm:top-4 sm:right-4 sm:mt-0 sm:text-left">
+              <div className="inline-block bg-dga-blanco text-dga-verde-profundo text-xs sm:text-sm font-semibold px-3 py-1 rounded-full shadow-lg">
+                1 USD = {parseFloat(exchangeRate).toFixed(2)} DOP
+                {lastRateUpdate && <span className="block text-xxs sm:text-xs text-dga-gris-neutro">Actualizado: {lastRateUpdate}</span>}
+              </div>
             </div>
           )}
         </div>
