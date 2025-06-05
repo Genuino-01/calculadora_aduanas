@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as gtag from '../lib/gtag'; // Import GA utility
 import '../styles/globals.css'; // Import global styles
+import { Analytics } from "@vercel/analytics/react";
 
 // Create a client
 const queryClient = new QueryClient({
@@ -38,6 +39,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />
+      <Analytics />
     </QueryClientProvider>
   );
 }
