@@ -31,7 +31,23 @@ export default function HomePage() {
       <Head>
         <title>Calculadora Impuestos de Vehículos - RD</title>
         <meta name="description" content="Calculadora de impuestos de importación de vehículos en República Dominicana." />
-        <link rel="icon" href="/favicon.ico" /> {/* Placeholder, add favicon later */}
+        
+        {/* Favicon */}
+        <link rel="icon" href="/calculator.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/calculator.png" /> {/* For Apple devices */}
+
+        {/* Open Graph / Facebook / WhatsApp */}
+        <meta property="og:title" content="Calculadora Impuestos de Vehículos - RD" />
+        <meta property="og:description" content="Calculadora de impuestos de importación de vehículos en República Dominicana." />
+        <meta property="og:image" content="https://www.cuantopagaelvehiculoenrd.com/calculator.png" /> {/* Absolute URL needed */}
+        <meta property="og:url" content="https://www.cuantopagaelvehiculoenrd.com" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Calculadora Impuestos de Vehículos - RD" />
+        <meta name="twitter:description" content="Calculadora de impuestos de importación de vehículos en República Dominicana." />
+        <meta name="twitter:image" content="https://www.cuantopagaelvehiculoenrd.com/calculator.png" /> {/* Absolute URL needed */}
       </Head>
 
       {/* Header Principal */}
