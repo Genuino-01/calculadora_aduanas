@@ -13,7 +13,8 @@ const ResultsDisplay = ({ results, lastRateUpdateInfo }) => {
     return null; // Don't render if no results
   }
 
-  const { valorFOB, impuestos, primeraPlaca, total, exchangeRateUsed } = results;
+  const { impuestos, primeraPlaca, exchangeRateUsed } = results; // Removed valorFOB, total
+  // We will recalculate the total based on impuestos and primeraPlaca only.
 
   const displayAmount = (amountObj) => {
     if (!amountObj) return showInDOP ? formatDOP(0) : formatUSD(0);
@@ -31,7 +32,7 @@ const ResultsDisplay = ({ results, lastRateUpdateInfo }) => {
   return (
     <div className="mt-8 p-6 bg-dga-blanco rounded-xl shadow-xl border border-dga-verde-suave">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-2xl font-bold text-dga-verde-profundo">Resultados del Cálculo</h3>
+        <h3 className="text-xl md:text-2xl font-bold text-dga-verde-profundo">Resultados del Cálculo</h3>
         <div className="flex items-center">
           <span className={`mr-3 text-sm font-medium ${!showInDOP ? 'text-dga-verde-oscuro' : 'text-dga-gris-neutro'}`}>USD</span>
           <Switch
@@ -63,22 +64,24 @@ const ResultsDisplay = ({ results, lastRateUpdateInfo }) => {
       </div>
 
       <div className="space-y-3">
+        {/* Valor FOB row removed */}
         <div className="flex justify-between items-center p-3 bg-dga-verde-suave rounded-lg">
-          <span className="font-medium text-dga-gris-oscuro">Valor FOB:</span>
-          <span className="font-semibold text-dga-verde-profundo text-lg">{displayAmount(valorFOB)}</span>
-        </div>
-        <div className="flex justify-between items-center p-3 bg-dga-verde-suave rounded-lg">
-          <span className="font-medium text-dga-gris-oscuro">Impuestos Aduanales ({results.esDRCAFTA ? 'DR-CAFTA 18%' : 'General 29.85%'}):</span>
-          <span className="font-semibold text-dga-verde-profundo text-lg">{displayAmount(impuestos)}</span>
+          <span className="font-medium text-dga-gris-oscuro">Impuestos Aduanales:</span>
+          <span className="font-semibold text-dga-verde-profundo text-base md:text-lg">{displayAmount(impuestos)}</span>
         </div>
         <div className="flex justify-between items-center p-3 bg-dga-verde-suave rounded-lg">
           <span className="font-medium text-dga-gris-oscuro">Primera Placa y Marbete:</span>
-          <span className="font-semibold text-dga-verde-profundo text-lg">{displayAmount(primeraPlaca)}</span>
+          <span className="font-semibold text-dga-verde-profundo text-base md:text-lg">{displayAmount(primeraPlaca)}</span>
         </div>
         <hr className="my-3 border-dga-verde-menta"/>
         <div className="flex justify-between items-center p-3 bg-dga-verde-menta rounded-lg">
-          <span className="font-bold text-dga-verde-profundo text-xl">TOTAL ESTIMADO:</span>
-          <span className="font-bold text-dga-verde-profundo text-xl">{displayAmount(total)}</span>
+          <span className="font-bold text-dga-verde-profundo text-lg md:text-xl">TOTAL ESTIMADO:</span>
+          <span className="font-bold text-dga-verde-profundo text-lg md:text-xl">
+            {displayAmount({
+              usd: (impuestos?.usd || 0) + (primeraPlaca?.usd || 0),
+              dop: (impuestos?.dop || 0) + (primeraPlaca?.dop || 0)
+            })}
+          </span>
         </div>
       </div>
 
