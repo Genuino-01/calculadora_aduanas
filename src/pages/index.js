@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getExchangeRate, getCurrentRateInfo } from '../lib/currencyAPI';
 import Calculator from '../components/Calculator';
 import AdSenseComponent from '../components/AdSenseComponent';
+import Link from 'next/link'; // Import Link
 
 export default function HomePage() {
   const [exchangeRate, setExchangeRate] = useState(null);
@@ -30,22 +31,41 @@ export default function HomePage() {
       <Head>
         <title>Calculadora Impuestos de Vehículos - RD</title>
         <meta name="description" content="Calculadora de impuestos de importación de vehículos en República Dominicana." />
-        <link rel="icon" href="/favicon.ico" /> {/* Placeholder, add favicon later */}
+        
+        {/* Favicon */}
+        <link rel="icon" href="/calculator.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/calculator.png" /> {/* For Apple devices */}
+
+        {/* Open Graph / Facebook / WhatsApp */}
+        <meta property="og:title" content="Calculadora Impuestos de Vehículos - RD" />
+        <meta property="og:description" content="Calculadora de impuestos de importación de vehículos en República Dominicana." />
+        <meta property="og:image" content="https://www.cuantopagaelvehiculoenrd.com/calculator.png" /> {/* Absolute URL needed */}
+        <meta property="og:url" content="https://www.cuantopagaelvehiculoenrd.com" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Calculadora Impuestos de Vehículos - RD" />
+        <meta name="twitter:description" content="Calculadora de impuestos de importación de vehículos en República Dominicana." />
+        <meta name="twitter:image" content="https://www.cuantopagaelvehiculoenrd.com/calculator.png" /> {/* Absolute URL needed */}
       </Head>
 
       {/* Header Principal */}
       <header className="bg-gradient-to-r from-dga-verde to-dga-verde-oscuro text-white p-6 shadow-md">
         <div className="container mx-auto max-w-4xl text-center">
           <div className="flex items-center justify-center space-x-3 mb-2">
-            <span role="img" aria-label="car icon" className="text-4xl">🚗</span>
-            <h1 className="text-4xl font-bold text-dga-verde-suave">Calculadora Impuestos de Vehículos</h1>
-            <span role="img" aria-label="calculator icon" className="text-4xl">🧮</span>
+            <span role="img" aria-label="car icon" className="text-2xl sm:text-3xl lg:text-4xl">🚗</span>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-dga-verde-suave">Calculadora Impuestos de Vehículos</h1>
+            <span role="img" aria-label="calculator icon" className="text-2xl sm:text-3xl lg:text-4xl">🧮</span>
           </div>
-          <p className="text-lg text-dga-verde-menta mb-4">República Dominicana - Cálculo de aranceles e impuestos</p>
+          <p className="text-base sm:text-lg text-dga-verde-menta mb-4">República Dominicana - Cálculo de aranceles e impuestos</p>
+          {/* Exchange Rate Display - Modified for responsiveness */}
           {exchangeRate && (
-            <div className="absolute top-4 right-4 bg-dga-blanco text-dga-verde-profundo text-sm font-semibold px-3 py-1 rounded-full shadow-lg">
-              1 USD = {parseFloat(exchangeRate).toFixed(2)} DOP
-              {lastRateUpdate && <span className="text-xs block text-dga-gris-neutro">Actualizado: {lastRateUpdate}</span>}
+            <div className="mt-2 text-center sm:absolute sm:top-4 sm:right-4 sm:mt-0 sm:text-left">
+              <div className="inline-block bg-dga-blanco text-dga-verde-profundo text-xs sm:text-sm font-semibold px-3 py-1 rounded-full shadow-lg">
+                1 USD = {parseFloat(exchangeRate).toFixed(2)} DOP
+                {lastRateUpdate && <span className="block text-xxs sm:text-xs text-dga-gris-neutro">Actualizado: {lastRateUpdate}</span>}
+              </div>
             </div>
           )}
         </div>
@@ -64,6 +84,26 @@ export default function HomePage() {
 
         {/* AdSense - Bottom */}
         <AdSenseComponent adSlot="YOUR_AD_SLOT_ID_BOTTOM" />
+
+        {/* Disclaimer Summary Section */}
+        <section className="mt-12 p-6 bg-dga-blanco rounded-xl shadow-lg border border-dga-verde-suave">
+          <h3 className="text-xl font-semibold text-dga-verde-profundo mb-3 text-center">Información Importante</h3>
+          <p className="text-sm text-dga-gris-neutro mb-2">
+            Los cálculos proporcionados por esta herramienta son estimaciones aproximadas y deben ser utilizados únicamente como referencia. 
+            Esta calculadora no tiene afiliación oficial con la Dirección General de Aduanas (DGA) de la República Dominicana.
+          </p>
+          <p className="text-sm text-dga-gris-neutro mb-4">
+            Es crucial verificar todos los valores y realizar consultas oficiales con la DGA o un agente aduanero certificado antes de tomar cualquier decisión comercial o realizar importaciones.
+          </p>
+          <div className="text-center text-sm">
+            <Link href="/terms-of-use" legacyBehavior>
+              <a className="text-dga-verde-oscuro hover:text-dga-verde-profundo hover:underline mr-4">Términos de Uso</a>
+            </Link>
+            <Link href="/privacy-policy" legacyBehavior>
+              <a className="text-dga-verde-oscuro hover:text-dga-verde-profundo hover:underline">Política de Privacidad</a>
+            </Link>
+          </div>
+        </section>
       </main>
 
       <footer className="text-center p-4 mt-8 text-dga-gris-neutro text-sm">
