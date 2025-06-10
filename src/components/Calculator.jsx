@@ -30,6 +30,7 @@ const Calculator = () => {
   const [isLoadingValor, setIsLoadingValor] = useState(false);
   const [isCalculating, setIsCalculating] = useState(false);
   const [currentExchangeRate, setCurrentExchangeRate] = useState(null);
+  const [calculationDone, setCalculationDone] = useState(false); // Added state for search status
   const [lastRateUpdateDetails, setLastRateUpdateDetails] = useState(null);
 
   // Fetch initial exchange rate and its details
@@ -126,6 +127,7 @@ const Calculator = () => {
         exchangeRate: currentExchangeRate,
       });
       setCalculatedResults(results);
+      setCalculationDone(true); // Set calculation as done
     } catch (error) {
       console.error("Error during calculation:", error);
       alert("Ocurrió un error durante el cálculo.");
@@ -135,6 +137,10 @@ const Calculator = () => {
   };
   
   // renderSelect function is no longer needed as VehicleSelector will be used directly.
+
+  const handleNewSearch = () => {
+    window.location.reload(); // Reload the page to reset everything
+  };
 
   return (
     <div className="bg-dga-blanco p-6 md:p-8 rounded-xl shadow-2xl border border-dga-verde-suave">
@@ -174,13 +180,22 @@ const Calculator = () => {
       </div>
 
       <div className="mt-8 text-center">
-        <button
-          onClick={handleCalculate}
-          disabled={isCalculating || isLoadingValor || !valorReferencia || !costoFlete}
-          className="w-full md:w-auto bg-dga-verde-oscuro hover:bg-dga-verde-profundo text-white font-semibold py-3 px-12 rounded-lg shadow-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isCalculating ? 'Calculando...' : 'Calcular Impuestos'}
-        </button>
+        {calculationDone ? (
+          <button
+            onClick={handleNewSearch}
+            className="w-full md:w-auto bg-dga-azul hover:bg-dga-azul-oscuro text-white font-semibold py-3 px-12 rounded-lg shadow-md transition duration-300 ease-in-out"
+          >
+            Nueva Búsqueda
+          </button>
+        ) : (
+          <button
+            onClick={handleCalculate}
+            disabled={isCalculating || isLoadingValor || !valorReferencia || !costoFlete}
+            className="w-full md:w-auto bg-dga-verde-oscuro hover:bg-dga-verde-profundo text-white font-semibold py-3 px-12 rounded-lg shadow-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isCalculating ? 'Calculando...' : 'Calcular Impuestos'}
+          </button>
+        )}
       </div>
 
       {/* DR-CAFTA Panel Display */}
