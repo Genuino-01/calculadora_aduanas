@@ -30,6 +30,7 @@ export default function HomePage() {
     <>
       <Head>
         <title>Calculadora Impuestos de Vehículos - RD</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <meta name="description" content="Calculadora de impuestos de importación de vehículos en República Dominicana." />
         
         {/* Favicon */}

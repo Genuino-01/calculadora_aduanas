@@ -18,7 +18,7 @@ export default function Document() {
             strategy="afterInteractive" // Good strategy for AdSense
           />
         )}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Removed viewport meta tag - it should be in index.js Head component instead */}
         
         {/* Google Analytics - GA4 */}
         {isProduction && GA_TRACKING_ID && (

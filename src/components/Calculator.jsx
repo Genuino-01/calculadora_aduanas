@@ -13,6 +13,7 @@ import { parseNumber } from '../lib/formatters'; // formatUSD is used in Results
 import ResultsDisplay from './ResultsDisplay';
 import DRCAFTAPanel from './DRCAFTAPanel';
 import VehicleSelector from './VehicleSelector';
+import * as gtag from '../lib/gtag'; // Import GA utility
 
 const Calculator = () => {
   // Form state
@@ -110,8 +111,22 @@ const Calculator = () => {
   const handleCalculate = async () => {
     if (!selectedMarca || !selectedModelo || !selectedEspecificacion || !selectedAno || !selectedPais || !costoFlete) {
       alert('Por favor complete todos los campos requeridos.');
+      // Track incomplete form submission
+      gtag.event({
+        action: 'calculation_attempt_incomplete',
+        category: 'calculator',
+        label: 'Missing required fields'
+      });
       return;
     }
+    
+    // Track calculation attempt
+    gtag.event({
+      action: 'calculation_attempt',
+      category: 'calculator',
+      label: `${selectedMarca} ${selectedModelo} ${selectedAno}`,
+      value: parseNumber(costoFlete)
+    });
     
     setIsCalculating(true);
     setCalculatedResults(null);
@@ -146,6 +161,14 @@ const Calculator = () => {
           porcentajeImpuesto: rpcResults.porcentaje_impuesto,
           porcentajePrimeraPlaca: rpcResults.porcentaje_primera_placa,
         };
+        // Track successful calculation
+        gtag.event({
+          action: 'calculation_success',
+          category: 'calculator',
+          label: `${selectedMarca} ${selectedModelo} ${selectedAno}`,
+          value: Math.round(rpcResults.total_usd)
+        });
+        
         setCalculatedResults(adaptedResults);
         setCalculationDone(true); // Set calculation as done
       } else {
@@ -160,7 +183,23 @@ const Calculator = () => {
   };
   
   const handleNewSearch = () => {
-    window.location.reload(); // Reload the page to reset everything
+    // Track new search event
+    gtag.event({
+      action: 'new_search',
+      category: 'calculator',
+      label: 'Reset form'
+    });
+    
+    // Reset state instead of reloading the page
+    setSelectedMarca('');
+    setSelectedModelo('');
+    setSelectedEspecificacion('');
+    setSelectedAno('');
+    setSelectedPais('');
+    setCostoFlete('');
+    setValorReferencia(null);
+    setCalculatedResults(null);
+    setCalculationDone(false);
   };
 
   return (
