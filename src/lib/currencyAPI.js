@@ -82,7 +82,7 @@ export const getExchangeRate = async () => {
 
   cachedRate = rate;
   lastFetchTime = now;
-  console.log('Current exchange rate set to:', rate);
+  console.log('Client-side exchange rate set to:', rate, '(Note: This rate may differ from the one used in calculations by the server)');
   return rate;
 };
 

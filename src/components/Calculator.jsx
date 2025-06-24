@@ -126,6 +126,9 @@ const Calculator = () => {
       });
 
       if (rpcResults) {
+        // Log the exchange rate used in the calculation
+        console.log('Exchange rate used in calculation (from Supabase RPC):', rpcResults.tasa_cambio_utilizada);
+        
         // Adapt rpcResults to the structure expected by ResultsDisplay and DRCAFTAPanel
         const adaptedResults = {
           valorFOB: { usd: rpcResults.valor_fob_usd, dop: rpcResults.valor_fob_dop },
@@ -190,7 +193,7 @@ const Calculator = () => {
         {calculationDone ? (
           <button
             onClick={handleNewSearch}
-            className="w-full md:w-auto bg-dga-azul hover:bg-dga-azul-oscuro text-white font-semibold py-3 px-12 rounded-lg shadow-md transition duration-300 ease-in-out"
+            className="w-full md:w-auto bg-dga-verde-oscuro hover:bg-dga-verde-profundo text-white font-bold py-3 px-12 rounded-lg shadow-md transition duration-300 ease-in-out"
           >
             Nueva Búsqueda
           </button>

@@ -57,7 +57,7 @@ const ResultsDisplay = ({ results, lastRateUpdateInfo }) => {
       </div>
 
       <div className="mb-4 text-sm text-dga-gris-neutro text-center">
-        Tasa de cambio utilizada: <strong>1 USD = {parseFloat(exchangeRateUsed).toFixed(4)} DOP</strong> 
+        <span className="font-medium">Tasa de cambio utilizada en el cálculo:</span> <strong>1 USD = {parseFloat(exchangeRateUsed).toFixed(4)} DOP</strong> 
         {lastRateUpdateInfo && lastRateUpdateInfo.rateSource && (
             <span className="text-xs"> ({lastRateUpdateInfo.rateSource === 'fallback' ? 'Tasa de respaldo' : `Fuente: ${lastRateUpdateInfo.rateSource}`}, {lastUpdatedText()})</span>
         )}
