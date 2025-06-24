@@ -168,11 +168,11 @@ const Calculator = () => {
       <h2 className="text-2xl sm:text-3xl font-bold text-dga-verde-profundo mb-6 text-center">Introduce los Datos del Vehículo</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6">
-        <VehicleSelector id="marca" label="Marca del Vehículo" icon="🏭" selectedValue={selectedMarca} onChange={setSelectedMarca} options={marcas} isLoading={isLoadingInitialData} placeholder="Selecciona la marca..." />
-        <VehicleSelector id="modelo" label="Modelo" icon="🚙" selectedValue={selectedModelo} onChange={setSelectedModelo} options={modelos || []} isLoading={isLoadingModelos} placeholder="Selecciona el modelo..." disabled={!selectedMarca || isLoadingModelos} />
-        <VehicleSelector id="especificacion" label="Especificación/Submodelo" icon="⚙️" selectedValue={selectedEspecificacion} onChange={setSelectedEspecificacion} options={especificaciones || []} isLoading={isLoadingEspecificaciones} placeholder="Selecciona la especificación..." disabled={!selectedModelo || isLoadingEspecificaciones} />
-        <VehicleSelector id="ano" label="Año de Fabricación" icon="📅" selectedValue={selectedAno} onChange={setSelectedAno} options={anos} isLoading={isLoadingInitialData} placeholder="Selecciona el año..." disabled={!selectedEspecificacion || isLoadingInitialData} />
-        <VehicleSelector id="pais" label="País de Fabricación" icon="🌍" selectedValue={selectedPais} onChange={setSelectedPais} options={paisesOptions} isLoading={isLoadingFilteredPaises} placeholder="Selecciona el país..." disabled={!selectedAno || isLoadingFilteredPaises || !selectedEspecificacion} />
+        <VehicleSelector id="marca" label="Marca del Vehículo" icon="🏭" selectedValue={selectedMarca} onChange={setSelectedMarca} options={marcas} isLoading={isLoadingInitialData} placeholder="Selecciona la marca..." disabled={calculationDone} />
+        <VehicleSelector id="modelo" label="Modelo" icon="🚙" selectedValue={selectedModelo} onChange={setSelectedModelo} options={modelos || []} isLoading={isLoadingModelos} placeholder="Selecciona el modelo..." disabled={!selectedMarca || isLoadingModelos || calculationDone} />
+        <VehicleSelector id="especificacion" label="Especificación/Submodelo" icon="⚙️" selectedValue={selectedEspecificacion} onChange={setSelectedEspecificacion} options={especificaciones || []} isLoading={isLoadingEspecificaciones} placeholder="Selecciona la especificación..." disabled={!selectedModelo || isLoadingEspecificaciones || calculationDone} />
+        <VehicleSelector id="ano" label="Año de Fabricación" icon="📅" selectedValue={selectedAno} onChange={setSelectedAno} options={anos} isLoading={isLoadingInitialData} placeholder="Selecciona el año..." disabled={!selectedEspecificacion || isLoadingInitialData || calculationDone} />
+        <VehicleSelector id="pais" label="País de Fabricación" icon="🌍" selectedValue={selectedPais} onChange={setSelectedPais} options={paisesOptions} isLoading={isLoadingFilteredPaises} placeholder="Selecciona el país..." disabled={!selectedAno || isLoadingFilteredPaises || !selectedEspecificacion || calculationDone} />
       </div>
 
       <div className="mt-4 md:col-span-2">
@@ -185,7 +185,8 @@ const Calculator = () => {
           value={costoFlete}
           onChange={(e) => setCostoFlete(e.target.value)}
           placeholder="Ej: 800.00"
-          className="w-full p-3 border border-dga-verde-menta rounded-lg shadow-sm focus:ring-2 focus:ring-dga-verde-oscuro focus:border-dga-verde-oscuro"
+          disabled={calculationDone}
+          className="w-full p-3 border border-dga-verde-menta rounded-lg shadow-sm focus:ring-2 focus:ring-dga-verde-oscuro focus:border-dga-verde-oscuro disabled:bg-gray-100 disabled:cursor-not-allowed"
         />
       </div>
 
